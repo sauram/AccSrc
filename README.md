@@ -1,1 +1,1 @@
-It contains only src folder of accelerometer app in development
+It contains only src folder of Data Collection app in development
