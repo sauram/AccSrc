@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SensorData</string>
+    <string name="label_light">Light Sensor</string>
+    <string name="label_proximity">Proximity sensor</string>
+    <string name="error_no_sensor">No sensor</string>
+    <string name="x_value">Value of x</string>
+    <string name="y_value">Value of y</string>
+    <string name="z_value">Value of z</string>
+</resources>
