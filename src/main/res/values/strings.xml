@@ -6,4 +6,7 @@
     <string name="x_value">Value of x</string>
     <string name="y_value">Value of y</string>
     <string name="z_value">Value of z</string>
+    <string name="p_value">Value of p</string>
+    <string name="q_value">Value of q</string>
+    <string name="r_value">Value of r</string>
 </resources>

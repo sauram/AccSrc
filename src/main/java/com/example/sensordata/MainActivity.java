@@ -22,11 +22,16 @@ public class MainActivity extends AppCompatActivity
     // System sensor manager instance.
     private SensorManager mSensorManager;
 
-    // Proximity and light sensors, as retrieved from the sensor manager.
+    // Accelerometer and gyroscope sensors, as retrieved from the sensor manager.
     private Sensor mSensorAcc;
+    private Sensor mSensorGyro;
 
-    // TextViews to display current sensor values.
+    // TextViews to display current Accelerometer sensor values.
     private TextView xValue, yValue, zValue;
+
+    //TextViews to display current Gyroscope sensor values.
+    private TextView pValue, qValue, rValue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,12 @@ public class MainActivity extends AppCompatActivity
         yValue = (TextView) findViewById(R.id.yValue);
         zValue = (TextView) findViewById(R.id.zValue);
 
+        pValue = (TextView) findViewById(R.id.pValue);
+        qValue = (TextView) findViewById(R.id.qValue);
+        rValue = (TextView) findViewById(R.id.rValue);
+
+
+
         // Get an instance of the sensor manager.
         mSensorManager = (SensorManager) getSystemService(
                 Context.SENSOR_SERVICE);
@@ -48,6 +59,9 @@ public class MainActivity extends AppCompatActivity
         mSensorAcc = mSensorManager.getDefaultSensor(
                 Sensor.TYPE_ACCELEROMETER);
 
+        mSensorGyro = mSensorManager.getDefaultSensor(
+                Sensor.TYPE_GYROSCOPE);
+
         // Get the error message from string resources.
         String sensor_error = getResources().getString(R.string.error_no_sensor);
 
@@ -57,6 +71,11 @@ public class MainActivity extends AppCompatActivity
             xValue.setText(sensor_error);
             yValue.setText(sensor_error);
             zValue.setText(sensor_error);
+        }
+        if (mSensorGyro == null) {
+            pValue.setText(sensor_error);
+            qValue.setText(sensor_error);
+            rValue.setText(sensor_error);
         }
 
     }
@@ -73,6 +92,10 @@ public class MainActivity extends AppCompatActivity
         // (SENSOR_DELAY_NORMAL)
         if (mSensorAcc != null) {
             mSensorManager.registerListener(this, mSensorAcc,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        if (mSensorGyro != null) {
+            mSensorManager.registerListener(this, mSensorGyro,
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
     }
@@ -99,10 +122,19 @@ public class MainActivity extends AppCompatActivity
         float x = sensorEvent.values[0];
         float y = sensorEvent.values[1];
         float z = sensorEvent.values[2];
+        float p = sensorEvent.values[0];
+        float q = sensorEvent.values[1];
+        float r = sensorEvent.values[2];
 
         xValue.setText("x value is : " + x);
         yValue.setText("y value is : " + y);
         zValue.setText("z value is : " + z);
+
+        pValue.setText("p value is : " + p);
+        qValue.setText("q value is : " + q);
+        rValue.setText("r value is : " + r);
+
+
     }
 
     /**
