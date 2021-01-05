@@ -1,12 +1,15 @@
 <resources>
-    <string name="app_name">SensorData</string>
+    <string name="app_name">SilentObserver</string>
     <string name="label_light">Light Sensor</string>
     <string name="label_proximity">Proximity sensor</string>
     <string name="error_no_sensor">No sensor</string>
     <string name="x_value">Value of x</string>
     <string name="y_value">Value of y</string>
     <string name="z_value">Value of z</string>
-    <string name="p_value">Value of p</string>
-    <string name="q_value">Value of q</string>
-    <string name="r_value">Value of r</string>
+    <string name="p_value">Value of x</string>
+    <string name="q_value">Value of y</string>
+    <string name="r_value">Value of z</string>
+    <string name="gyro_des">Sensor data of Gyroscope</string>
+    <string name="acc_des">Sensor data of Accelerometer</string>
+    <string name="wbu">What about you?</string>
 </resources>

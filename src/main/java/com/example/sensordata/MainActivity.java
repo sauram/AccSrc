@@ -130,9 +130,9 @@ public class MainActivity extends AppCompatActivity
         yValue.setText("y value is : " + y);
         zValue.setText("z value is : " + z);
 
-        pValue.setText("p value is : " + p);
-        qValue.setText("q value is : " + q);
-        rValue.setText("r value is : " + r);
+        pValue.setText("x value is : " + p);
+        qValue.setText("y value is : " + q);
+        rValue.setText("z value is : " + r);
 
 
     }
