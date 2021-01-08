@@ -7,11 +7,20 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
+/**
+ * SensorListeners demonstrates how to gain access to sensors (here, the light
+ * and proximity sensors), how to register sensor listeners, and how to
+ * handle sensor events.
+ */
 public class MainActivity extends AppCompatActivity
         implements SensorEventListener {
 
@@ -27,8 +36,9 @@ public class MainActivity extends AppCompatActivity
 
     //TextViews to display current Gyroscope sensor values.
     private TextView pValue, qValue, rValue;
-
-
+    float x=0,y=0,z=0,p=0,q=0,r=0;
+    long startTime= new Date().getTime();
+    long currentTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +59,9 @@ public class MainActivity extends AppCompatActivity
         mSensorManager = (SensorManager) getSystemService(
                 Context.SENSOR_SERVICE);
 
-        
+        // Get light and proximity sensors from the sensor manager.
+        // The getDefaultSensor() method returns null if the sensor
+        // is not available on the device.
         mSensorAcc = mSensorManager.getDefaultSensor(
                 Sensor.TYPE_ACCELEROMETER);
 
@@ -80,10 +92,6 @@ public class MainActivity extends AppCompatActivity
 
         // Listeners for the sensors are registered in this callback and
         // can be unregistered in onPause().
-        //
-        // Check to ensure sensors are available before registering listeners.
-        // Both listeners are registered with a "normal" amount of delay
-        // (SENSOR_DELAY_NORMAL)
         if (mSensorAcc != null) {
             mSensorManager.registerListener(this, mSensorAcc,
                     SensorManager.SENSOR_DELAY_NORMAL);
@@ -92,6 +100,13 @@ public class MainActivity extends AppCompatActivity
             mSensorManager.registerListener(this, mSensorGyro,
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
+//        Timer time= new Timer();
+//        time.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        });
     }
 
     @Override
@@ -109,21 +124,68 @@ public class MainActivity extends AppCompatActivity
 
         // The sensor type (as defined in the Sensor class).
         //int sensorType = sensorEvent.sensor.getType();
+        //Timer time= new Timer();
 
-        float x = sensorEvent.values[0];
-        float y = sensorEvent.values[1];
-        float z = sensorEvent.values[2];
-        float p = sensorEvent.values[0];
-        float q = sensorEvent.values[1];
-        float r = sensorEvent.values[2];
+        int sensorType = sensorEvent.sensor.getType();
+//        x = sensorEvent.values[0];
+//        y = sensorEvent.values[1];
+//        z = sensorEvent.values[2];
+//        p = sensorEvent.values[0];
+//        q = sensorEvent.values[1];
+//        r = sensorEvent.values[2];
+        switch(sensorType){
+            case Sensor.TYPE_ACCELEROMETER:
+                x = sensorEvent.values[0];
+                y = sensorEvent.values[1];
+                z = sensorEvent.values[2];
+                break;
+            case Sensor.TYPE_GYROSCOPE:
+                p = sensorEvent.values[0];
+                q = sensorEvent.values[1];
+                r = sensorEvent.values[2];
+                break;
+            default:
+                System.out.println("Default Encountered");
+        }
 
-        xValue.setText("x value is : " + x);
-        yValue.setText("y value is : " + y);
-        zValue.setText("z value is : " + z);
+//        time.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                xValue.setText("x value is : " + x);
+//                yValue.setText("y value is : " + y);
+//                zValue.setText("z value is : " + z);
+//
+//                pValue.setText("x value is : " + p);
+//                qValue.setText("y value is : " + q);
+//                rValue.setText("z value is : " + r);
+//            }
+//        },0,2000);
+//        xValue.setText("x value is : " + x);
+//        yValue.setText("y value is : " + y);
+//        zValue.setText("z value is : " + z);
+//
+//        pValue.setText("x value is : " + p);
+//        qValue.setText("y value is : " + q);
+//        rValue.setText("z value is : " + r);
 
-        pValue.setText("x value is : " + p);
-        qValue.setText("y value is : " + q);
-        rValue.setText("z value is : " + r);
+          currentTime= new Date().getTime();
+          System.out.println(currentTime-startTime);
+        if(currentTime-startTime>1000){
+            xValue.setText("x value is : " + x);
+            yValue.setText("y value is : " + y);
+            zValue.setText("z value is : " + z);
+
+            pValue.setText("x value is : " + p);
+            qValue.setText("y value is : " + q);
+            rValue.setText("z value is : " + r);
+            System.out.println(startTime-currentTime);
+            startTime=currentTime;
+        }
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
 
     }
