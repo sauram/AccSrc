@@ -11,11 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-/**
- * SensorListeners demonstrates how to gain access to sensors (here, the light
- * and proximity sensors), how to register sensor listeners, and how to
- * handle sensor events.
- */
+
 public class MainActivity extends AppCompatActivity
         implements SensorEventListener {
 
@@ -53,9 +49,7 @@ public class MainActivity extends AppCompatActivity
         mSensorManager = (SensorManager) getSystemService(
                 Context.SENSOR_SERVICE);
 
-        // Get light and proximity sensors from the sensor manager.
-        // The getDefaultSensor() method returns null if the sensor
-        // is not available on the device.
+        
         mSensorAcc = mSensorManager.getDefaultSensor(
                 Sensor.TYPE_ACCELEROMETER);
 
@@ -116,9 +110,6 @@ public class MainActivity extends AppCompatActivity
         // The sensor type (as defined in the Sensor class).
         //int sensorType = sensorEvent.sensor.getType();
 
-        // The new data value of the sensor.  Both the light and proximity
-        // sensors report one value at a time, which is always the first
-        // element in the values array.
         float x = sensorEvent.values[0];
         float y = sensorEvent.values[1];
         float z = sensorEvent.values[2];
