@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,6 +41,10 @@ public class MainActivity extends AppCompatActivity
     float x=0,y=0,z=0,p=0,q=0,r=0;
     long startTime= new Date().getTime();
     long currentTime;
+
+    //Matrix to send
+    ArrayList< ArrayList<Float> > sensorMatrix= new ArrayList< ArrayList<Float> >();
+    int counter=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -170,7 +176,7 @@ public class MainActivity extends AppCompatActivity
 
           currentTime= new Date().getTime();
           System.out.println(currentTime-startTime);
-        if(currentTime-startTime>1000){
+        if(currentTime-startTime>500){
             xValue.setText("x value is : " + x);
             yValue.setText("y value is : " + y);
             zValue.setText("z value is : " + z);
@@ -178,8 +184,15 @@ public class MainActivity extends AppCompatActivity
             pValue.setText("x value is : " + p);
             qValue.setText("y value is : " + q);
             rValue.setText("z value is : " + r);
-            System.out.println(startTime-currentTime);
+
+            sensorMatrix.add(new ArrayList<Float>(Arrays.asList(x,y,z,p,q,r)));
+            counter+=1;
+            System.out.println(startTime-currentTime + " ---- " + counter);
             startTime=currentTime;
+        }
+        if(counter==128){
+            counter=0;
+            System.out.println(sensorMatrix);
         }
 //        try {
 //            Thread.sleep(2000);
